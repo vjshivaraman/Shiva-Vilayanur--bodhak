@@ -2,13 +2,6 @@
 	import { profile } from '../data';
 
 	let { imageSrc } = $props<{ imageSrc?: string }>();
-
-	function scrollToSection(id: string) {
-		const element = document.getElementById(id);
-		if (element) {
-			element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		}
-	}
 </script>
 
 <section

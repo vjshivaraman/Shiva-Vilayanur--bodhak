@@ -6,6 +6,7 @@
 	import Clientele from '$lib/components/Clientele.svelte';
 	import ProfessionalHistory from '$lib/components/ProfessionalHistory.svelte';
 	import Education from '$lib/components/Education.svelte';
+	import { base } from '$app/paths';
 
 	const navSections = [
 		{ id: 'hero', label: 'Home' },
@@ -28,7 +29,7 @@
 <Navbar sections={navSections} />
 
 <main>
-	<Hero imageSrc="/profile-photo.png" />
+	<Hero imageSrc={`${base}/profile-photo.png`} />
 	<EngagementModel />
 	<WhyMe />
 	<Clientele />
