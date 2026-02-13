@@ -1,0 +1,19 @@
+# Block AI crawlers and bots via server headers
+# Note: GitHub Pages doesn't support .htaccess, but this is useful for other hosting
+
+<IfModule mod_headers.c>
+    # Block all bots and AI crawlers
+    Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex"
+    
+    # Block specific AI crawlers
+    <FilesMatch "\.(html|htm)$">
+        Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex"
+    </FilesMatch>
+</IfModule>
+
+# Block access via robots.txt enforcement
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_USER_AGENT} (GPTBot|ChatGPT-User|Google-Extended|CCBot|anthropic-ai|Claude-Web|PerplexityBot|Applebot-Extended|Omgilibot|FacebookBot|Bytespider|Diffbot|SemrushBot|AhrefsBot|MJ12bot|DotBot|BLEXBot) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>

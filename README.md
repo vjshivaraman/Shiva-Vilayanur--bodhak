@@ -1,6 +1,6 @@
 # Shiva Vilayanur - Personal Profile Website
 
-A modern, responsive personal profile website for Shiva Vilayanur, Fractional CFO & Strategic Finance Partner. Built with SvelteKit, TypeScript, and TailwindCSS v4.1, featuring WCAG AAA accessibility compliance and offline support.
+A modern, responsive personal profile website for Shiva Vilayanur, Fractional CFO & Strategic Finance Partner. Built with SvelteKit, TypeScript, and TailwindCSS v4.1, featuring WCAG AAA accessibility compliance, bot protection, and offline support.
 
 ## Features
 
@@ -8,6 +8,7 @@ A modern, responsive personal profile website for Shiva Vilayanur, Fractional CF
 - **Dark Mode Support**: Automatic theme switching with manual override, respecting system preferences
 - **Offline Support**: Service worker caches all assets for offline access and improved performance
 - **WCAG AAA Compliant**: Highest level of accessibility standards (7:1 contrast ratio for normal text, 4.5:1 for large text)
+- **Bot Protection**: Comprehensive measures to block AI crawlers and search engine indexing
 - **Performance Optimized**: Fast loading with local caching and optimized asset delivery
 - **Modern Design**: Clean, professional interface using TailwindCSS v4.1 with CSS-based theme configuration
 - **Type-Safe**: Full TypeScript support for enhanced developer experience
@@ -28,30 +29,30 @@ A modern, responsive personal profile website for Shiva Vilayanur, Fractional CF
 
 ```mermaid
 graph TB
-    subgraph "Client Browser"
-        A[User Request] --> B[SvelteKit App]
-        B --> C[Service Worker]
-        C --> D{Cache Available?}
-        D -->|Yes| E[Serve from Cache]
-        D -->|No| F[Network Request]
-        F --> G[Update Cache]
+    subgraph Client["Client Browser"]
+        A["User Request"] --> B["SvelteKit App"]
+        B --> C["Service Worker"]
+        C --> D{"Cache Available?"}
+        D -->|Yes| E["Serve from Cache"]
+        D -->|No| F["Network Request"]
+        F --> G["Update Cache"]
         G --> E
     end
     
-    subgraph "Application Layer"
-        B --> H[+layout.svelte]
-        H --> I[+page.svelte]
-        I --> J[Navbar Component]
-        I --> K[Hero Component]
-        I --> L[EngagementModel Component]
-        I --> M[WhyMe Component]
-        I --> N[Clientele Component]
-        I --> O[ProfessionalHistory Component]
-        I --> P[Education Component]
+    subgraph App["Application Layer"]
+        B --> H["Layout Component"]
+        H --> I["Page Component"]
+        I --> J["Navbar Component"]
+        I --> K["Hero Component"]
+        I --> L["EngagementModel Component"]
+        I --> M["WhyMe Component"]
+        I --> N["Clientele Component"]
+        I --> O["ProfessionalHistory Component"]
+        I --> P["Education Component"]
     end
     
-    subgraph "Data Layer"
-        Q[data.ts] --> I
+    subgraph Data["Data Layer"]
+        Q["data.ts"] --> I
         Q --> K
         Q --> L
         Q --> M
@@ -60,19 +61,19 @@ graph TB
         Q --> P
     end
     
-    subgraph "Styling Layer"
-        R[app.css] --> H
-        S[@theme Directive] --> R
-        T[CSS Variables] --> R
-        T --> U[Light Mode]
-        T --> V[Dark Mode]
+    subgraph Style["Styling Layer"]
+        R["app.css"] --> H
+        S["Theme Directive"] --> R
+        T["CSS Variables"] --> R
+        T --> U["Light Mode"]
+        T --> V["Dark Mode"]
     end
     
-    subgraph "Build System"
-        W[Vite] --> X[TailwindCSS Vite Plugin]
-        X --> Y[PostCSS]
-        Y --> Z[Autoprefixer]
-        Z --> AA[Optimized CSS]
+    subgraph Build["Build System"]
+        W["Vite"] --> X["TailwindCSS Plugin"]
+        X --> Y["PostCSS"]
+        Y --> Z["Autoprefixer"]
+        Z --> AA["Optimized CSS"]
     end
 ```
 
@@ -150,37 +151,22 @@ npm run dev
 # The site will be available at http://localhost:5173
 ```
 
-The development server includes:
-- Hot Module Replacement (HMR)
-- Fast refresh for instant updates
-- Source maps for debugging
-- TypeScript type checking
+The development server includes Hot Module Replacement (HMR), fast refresh, source maps, and TypeScript type checking.
 
-### Build
+### Build & Preview
 
 ```bash
 # Create production build
 npm run build
 
-# Output will be in .svelte-kit/output/
-```
-
-### Preview Production Build
-
-```bash
-# Preview the production build locally
+# Preview production build locally
 npm run preview
-```
 
-### Type Checking
-
-```bash
-# Run TypeScript type checking
+# Type checking
 npm run check
-
-# Watch mode for continuous type checking
-npm run check:watch
 ```
+
+Build output is in the `build/` directory, ready for static hosting.
 
 ## Project Structure
 
@@ -199,19 +185,24 @@ shiva-vilayanur/
 │   │   └── data.ts              # Centralized content data
 │   ├── routes/
 │   │   ├── +layout.svelte       # Root layout (theme, meta)
+│   │   ├── +layout.ts           # Prerender configuration
 │   │   └── +page.svelte         # Home page (main content)
 │   ├── app.css                  # Global styles & TailwindCSS @theme
 │   ├── app.d.ts                 # TypeScript declarations
 │   ├── app.html                 # HTML template
+│   ├── hooks.server.ts          # Server hooks (headers, bot protection)
 │   └── service-worker.ts        # Service worker for caching
-├── static/                      # Static assets (images, etc.)
-├── .svelte-kit/                 # Build output (gitignored)
-├── node_modules/                # Dependencies (gitignored)
+├── static/                      # Static assets
+│   ├── robots.txt               # Bot blocking rules
+│   ├── .nojekyll                # Disable Jekyll processing
+│   └── .htaccess                # Apache server rules (if supported)
+├── .github/
+│   └── workflows/
+│       └── deploy.yml           # GitHub Pages deployment workflow
 ├── package.json                 # Project dependencies & scripts
-├── tsconfig.json                # TypeScript configuration
+├── svelte.config.js             # SvelteKit configuration
 ├── tailwind.config.ts           # TailwindCSS config (minimal for v4.1)
 ├── vite.config.ts              # Vite configuration
-├── postcss.config.js            # PostCSS configuration
 └── README.md                    # This file
 ```
 
@@ -221,10 +212,7 @@ The website consists of six main content sections:
 
 1. **Hero Section** - Profile photo placeholder, name, title, personal statement, and contact buttons (LinkedIn, Email)
 2. **Engagement Model** - Three engagement models (Diagnostic Sprint, System Build, Interim Leadership) with methodology
-3. **Why Me** - Three-column layout showcasing:
-   - Functional Role Experience (Fintech/SaaS DNA)
-   - Industry Type Experience (Venture Capital Insight)
-   - Work Type Experience (Fractional CFO Experience)
+3. **Why Me** - Three-column layout showcasing functional role, industry type, and work type experience
 4. **Clientele** - Revolving carousel displaying client engagements with crisis, action, outcome, and testimonials
 5. **Professional History** - Chronological timeline of work experience with accomplishments and investments
 6. **Education** - Education credentials, certificates, and honors/awards
@@ -233,23 +221,15 @@ The website consists of six main content sections:
 
 ### Updating Content
 
-All content is centralized in `src/lib/data.ts`. Edit this file to update:
-
-- Profile information (name, title, tagline, contact details)
-- Engagement models and methodology
-- Client testimonials and engagements
-- Professional history entries
-- Education and certificates
-- Honors and awards
+All content is centralized in `src/lib/data.ts`. Edit this file to update profile information, engagement models, client testimonials, professional history, education, and honors.
 
 ### Adding Profile Photo
 
 1. Place your profile image in the `static/` directory
 2. Update the `Hero` component in `src/routes/+page.svelte`:
-
-```svelte
-<Hero imageSrc="/your-image.jpg" />
-```
+   ```svelte
+   <Hero imageSrc="/your-image.jpg" />
+   ```
 
 ### Color Scheme & Theming
 
@@ -257,51 +237,28 @@ Colors are configured using TailwindCSS v4.1's `@theme` directive in `src/app.cs
 
 - **Light Mode**: Defined in `:root` CSS variables
 - **Dark Mode**: Defined in `.dark` CSS variables
-- **Theme Registration**: Colors are registered with Tailwind via `@theme` block
+- **Theme Registration**: Colors registered with Tailwind via `@theme` block
 
-To modify colors:
+To modify colors, update CSS variables in `src/app.css`. Colors are automatically available as Tailwind utilities (`bg-primary`, `text-primary`, etc.).
 
-1. Update CSS variables in `src/app.css`:
-   ```css
-   :root {
-     --color-primary: #your-color;
-   }
-   
-   .dark {
-     --color-primary: #your-dark-color;
-   }
-   ```
+**TailwindCSS v4.1 Configuration:**
+- Theme defined via `@theme` directive in CSS (not JavaScript config)
+- `tailwind.config.ts` is minimal (only content paths, plugins, darkMode)
+- `@tailwindcss/vite` plugin handles processing
+- CSS variables enable dynamic theme switching
 
-2. Colors are automatically available as Tailwind utilities:
-   - `bg-primary`, `text-primary`, `border-primary`, etc.
-   - `bg-primary-dark` for darker variant
+The color system ensures WCAG AAA compliance with 7:1 contrast ratio for normal text and 4.5:1 for large text.
 
-### TailwindCSS v4.1 Configuration
+## Bot and AI Crawler Protection
 
-This project uses TailwindCSS v4.1 with CSS-based theme configuration:
+This website implements comprehensive measures to block AI crawlers and bots:
 
-- **Theme Definition**: `@theme` directive in `src/app.css`
-- **Config File**: `tailwind.config.ts` (minimal - only content paths, plugins, darkMode)
-- **Build Integration**: `@tailwindcss/vite` plugin handles processing
-- **CSS Variables**: Dynamic theme switching via CSS custom properties
+- **robots.txt**: Blocks all crawlers including GPTBot, ChatGPT-User, Google-Extended, Claude, Perplexity, and others
+- **Meta Tags**: Multiple meta tags in HTML head to prevent indexing and archiving
+- **HTTP Headers**: X-Robots-Tag headers (via `hooks.server.ts`)
+- **User-Agent Blocking**: Server-side rules for Apache servers (`.htaccess`)
 
-## Styling Architecture
-
-### TailwindCSS v4.1 Features Used
-
-- **CSS-based Theme**: `@theme` directive for design tokens
-- **CSS Variables**: Runtime theme switching with `:root` and `.dark`
-- **Vite Integration**: Direct Vite plugin for faster builds
-- **Custom Colors**: Registered via `@theme` for utility class generation
-
-### Color System
-
-The color system ensures WCAG AAA compliance:
-
-- **Normal Text**: 7:1 contrast ratio minimum
-- **Large Text**: 4.5:1 contrast ratio minimum
-- **Interactive Elements**: High contrast for buttons and links
-- **Dark Mode**: All colors verified for readability
+**Note**: While these measures provide strong protection, determined crawlers may still access content. For detailed information, see [BOT_PROTECTION.md](./BOT_PROTECTION.md).
 
 ## Accessibility
 
@@ -318,7 +275,7 @@ This website adheres to WCAG AAA standards:
 
 ## Performance
 
-### Optimization Strategies
+Optimization strategies include:
 
 - **Service Worker**: Caches assets for offline access
 - **Code Splitting**: Automatic via SvelteKit
@@ -327,13 +284,7 @@ This website adheres to WCAG AAA standards:
 - **TypeScript**: Compile-time error checking
 - **Vite**: Fast HMR and optimized builds
 
-### Build Output
-
-Production builds are optimized:
-- Minified CSS and JavaScript
-- Tree-shaken dependencies
-- Optimized assets
-- Source maps for debugging (optional)
+Production builds are optimized with minified CSS/JavaScript, tree-shaken dependencies, and optimized assets.
 
 ## Browser Support
 
@@ -343,9 +294,38 @@ Production builds are optimized:
 - ✅ Mobile browsers (iOS Safari, Chrome Mobile)
 - ✅ Progressive enhancement for older browsers
 
-## Development Workflow
+## Deployment
 
-### Recommended Workflow
+### GitHub Pages (Recommended)
+
+This project is configured for GitHub Pages deployment with automatic CI/CD.
+
+**Quick Setup:**
+
+1. **Enable GitHub Pages**: Repository → Settings → Pages → Source: **GitHub Actions**
+2. **Push to GitHub**: Commit and push your code to the `main` branch
+3. **Monitor**: Watch the "Deploy to GitHub Pages" workflow in the Actions tab
+4. **Access**: Site will be live at `https://your-username.github.io/repo-name`
+
+**Important Notes:**
+- If your repo is named `username.github.io`, update `svelte.config.js` to set `base: ''` (empty string)
+- For other repo names, the base path is automatically configured
+- The site includes a `404.html` fallback for client-side routing
+
+**For detailed step-by-step instructions**, see [GITHUB_PAGES_SETUP.md](./GITHUB_PAGES_SETUP.md)
+
+### Other Deployment Options
+
+- **Vercel**: Change adapter to `@sveltejs/adapter-vercel`
+- **Netlify**: Change adapter to `@sveltejs/adapter-netlify`
+- **Cloudflare Pages**: Change adapter to `@sveltejs/adapter-cloudflare`
+- **Node.js Server**: Change adapter to `@sveltejs/adapter-node`
+
+### Environment Variables
+
+No environment variables required for basic functionality. Add `.env` file if needed for API endpoints, analytics keys, or other configuration.
+
+## Development Workflow
 
 1. **Content Updates**: Edit `src/lib/data.ts`
 2. **Component Changes**: Modify components in `src/lib/components/`
@@ -354,53 +334,24 @@ Production builds are optimized:
 5. **Testing**: Test in both light and dark modes
 6. **Build**: Run `npm run build` to verify production build
 
-### Code Quality
-
-- **TypeScript**: Strict type checking enabled
-- **Svelte Check**: Component validation
-- **ESLint**: Code quality (if configured)
-- **Prettier**: Code formatting (if configured)
-
-## Deployment
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Deployment Options
-
-This project can be deployed to:
-
-- **Vercel**: Automatic deployment with `@sveltejs/adapter-auto`
-- **Netlify**: Static site deployment
-- **Cloudflare Pages**: Edge deployment
-- **GitHub Pages**: Static hosting
-- **Node.js Server**: Using `@sveltejs/adapter-node`
-
-### Environment Variables
-
-No environment variables required for basic functionality. Add `.env` file if needed for:
-- API endpoints
-- Analytics keys
-- Other configuration
+Code quality is ensured through TypeScript strict type checking and Svelte component validation.
 
 ## Troubleshooting
 
-### Common Issues
+**Styles not applying**: Ensure `src/app.css` is imported in `+layout.svelte`
 
-**Issue**: Styles not applying
-- **Solution**: Ensure `src/app.css` is imported in `+layout.svelte`
+**Dark mode not working**: Check that `darkMode: 'class'` is set in `tailwind.config.ts`
 
-**Issue**: Dark mode not working
-- **Solution**: Check that `darkMode: 'class'` is set in `tailwind.config.ts`
+**Type errors**: Run `npm run check` to see detailed error messages
 
-**Issue**: Type errors
-- **Solution**: Run `npm run check` to see detailed error messages
+**Build fails**: Clear `.svelte-kit` directory and rebuild
 
-**Issue**: Build fails
-- **Solution**: Clear `.svelte-kit` directory and rebuild
+**GitHub Pages issues**: See [GITHUB_PAGES_SETUP.md](./GITHUB_PAGES_SETUP.md) troubleshooting section
+
+## Additional Documentation
+
+- **[GITHUB_PAGES_SETUP.md](./GITHUB_PAGES_SETUP.md)** - Detailed GitHub Pages deployment guide
+- **[BOT_PROTECTION.md](./BOT_PROTECTION.md)** - Comprehensive bot protection documentation
 
 ## License
 
