@@ -30,10 +30,30 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Set repository name
+        id: repo
+        run: |
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          echo "name=$REPO_NAME" >> $GITHUB_OUTPUT
+          echo "Repository name: $REPO_NAME"
+      
       - name: Build
         env:
-          BASE_PATH: '/${{ github.event.repository.name }}'
+          BASE_PATH: '/${{ steps.repo.outputs.name }}'
         run: npm run build
+
+      - name: Verify build output
+        run: |
+          echo "Checking build directory..."
+          ls -la build/ || echo "Build directory not found!"
+          if [ ! -d "build" ]; then
+            echo "ERROR: Build directory does not exist!"
+            exit 1
+          fi
+          if [ ! -f "build/index.html" ] && [ ! -f "build/404.html" ]; then
+            echo "WARNING: No index.html or 404.html found in build directory"
+            ls -la build/
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
