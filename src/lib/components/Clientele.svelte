@@ -58,7 +58,7 @@
 			<div class="overflow-hidden">
 				<div
 					class="flex transition-transform duration-500 ease-in-out"
-					style="transform: translateX(-{currentIndex * 100}%)"
+					style:transform="translateX(-{currentIndex * 100}%)"
 					role="group"
 					aria-label="Client testimonials carousel"
 				>
@@ -164,7 +164,7 @@
 				{#each clientele as _, index}
 					<button
 						onclick={() => goToSlide(index)}
-						class="w-3 h-3 rounded-full transition-all {currentIndex === index
+						class="w-3 h-3 rounded-full transition-[background-color,width] {currentIndex === index
 							? 'bg-primary-dark w-8'
 							: 'bg-text-secondary'}"
 						aria-label="Go to slide {index + 1}"

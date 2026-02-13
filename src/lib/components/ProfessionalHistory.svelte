@@ -11,7 +11,7 @@
 			Professional History
 		</h2>
 
-		<div class="max-w-4xl mx-auto">
+		<div class="max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
 			<div class="relative">
 				<!-- Timeline Line -->
 				<div
@@ -20,7 +20,7 @@
 				></div>
 
 				<!-- Timeline Items -->
-				<div class="space-y-12">
+				<div class="space-y-8 sm:space-y-10 md:space-y-12 lg:space-y-16">
 					{#each professionalHistory as item, index}
 						<div class="relative flex items-start md:items-center">
 							<!-- Timeline Dot -->
@@ -31,40 +31,40 @@
 
 							<!-- Content -->
 							<div
-								class="ml-12 md:ml-0 md:w-1/2 {index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'} bg-background p-6 rounded-lg shadow-md"
+								class="ml-12 md:ml-0 md:w-1/2 {index % 2 === 0 ? 'md:mr-auto md:pr-6 lg:pr-8' : 'md:ml-[calc(50%+0.5rem)]'} bg-background p-4 sm:p-5 md:p-6 lg:p-8 rounded-lg shadow-md"
 							>
-								<div class="flex flex-col md:flex-row md:items-start md:justify-between mb-2">
-									<div>
-										<h3 class="text-xl font-semibold text-text">
+								<div class="flex flex-col md:flex-row md:items-start md:justify-between mb-2 md:mb-3">
+									<div class="flex-1">
+										<h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-text mb-1 md:mb-2">
 											{item.role}
 										</h3>
-										<p class="text-lg font-medium text-primary">
+										<p class="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-primary">
 											{item.company}
 										</p>
 									</div>
-									<div class="text-sm text-text-secondary mt-2 md:mt-0">
+									<time class="text-xs sm:text-sm md:text-sm lg:text-base text-text-secondary mt-2 md:mt-0 md:ml-4 flex-shrink-0" datetime={item.period}>
 										{item.period}
-									</div>
+									</time>
 								</div>
 
 								{#if item.location}
-									<p class="text-sm text-text-secondary mb-2">
+									<p class="text-xs sm:text-sm md:text-sm lg:text-base text-text-secondary mb-2 md:mb-3">
 										{item.location}
 									</p>
 								{/if}
 
 								{#if item.description}
-									<p class="text-text-secondary mb-4">
+									<p class="text-sm sm:text-base md:text-base lg:text-lg text-text-secondary mb-3 md:mb-4 lg:mb-6 leading-relaxed">
 										{item.description}
 									</p>
 								{/if}
 
 								{#if item.accomplishments}
-									<ul class="space-y-2 mb-4">
+									<ul class="space-y-1.5 sm:space-y-2 md:space-y-2 mb-3 md:mb-4 lg:mb-6">
 										{#each item.accomplishments as accomplishment}
-											<li class="text-text-secondary flex items-start">
+											<li class="text-xs sm:text-sm md:text-base lg:text-lg text-text-secondary flex items-start leading-relaxed">
 												<svg
-													class="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0"
+													class="h-4 w-4 sm:h-5 sm:w-5 md:h-5 md:w-5 text-primary mr-2 mt-0.5 flex-shrink-0"
 													fill="currentColor"
 													viewBox="0 0 20 20"
 													aria-hidden="true"
@@ -82,13 +82,13 @@
 								{/if}
 
 								{#if item.currentEngagements}
-									<div class="mt-4">
-										<p class="font-semibold text-text mb-2">Current engagements:</p>
-										<ul class="space-y-2">
+									<div class="mt-3 md:mt-4 lg:mt-6">
+										<p class="text-sm sm:text-base md:text-base lg:text-lg font-semibold text-text mb-1.5 md:mb-2 lg:mb-3">Current engagements:</p>
+										<ul class="space-y-1.5 sm:space-y-2 md:space-y-2">
 											{#each item.currentEngagements as engagement}
-												<li class="text-text-secondary flex items-start">
+												<li class="text-xs sm:text-sm md:text-base lg:text-lg text-text-secondary flex items-start leading-relaxed">
 													<svg
-														class="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0"
+														class="h-4 w-4 sm:h-5 sm:w-5 md:h-5 md:w-5 text-secondary mr-2 mt-0.5 flex-shrink-0"
 														fill="currentColor"
 														viewBox="0 0 20 20"
 														aria-hidden="true"
@@ -107,13 +107,13 @@
 								{/if}
 
 								{#if item.investments}
-									<div class="mt-4">
-										<p class="font-semibold text-text mb-2">Investments:</p>
-										<ul class="space-y-2">
+									<div class="mt-3 md:mt-4 lg:mt-6">
+										<p class="text-sm sm:text-base md:text-base lg:text-lg font-semibold text-text mb-1.5 md:mb-2 lg:mb-3">Investments:</p>
+										<ul class="space-y-1.5 sm:space-y-2 md:space-y-2">
 											{#each item.investments as investment}
-												<li class="text-text-secondary flex items-start">
+												<li class="text-xs sm:text-sm md:text-base lg:text-lg text-text-secondary flex items-start leading-relaxed">
 													<svg
-														class="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0"
+														class="h-4 w-4 sm:h-5 sm:w-5 md:h-5 md:w-5 text-secondary mr-2 mt-0.5 flex-shrink-0"
 														fill="currentColor"
 														viewBox="0 0 20 20"
 														aria-hidden="true"

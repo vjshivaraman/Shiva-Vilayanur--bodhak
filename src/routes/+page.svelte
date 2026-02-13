@@ -28,7 +28,7 @@
 <Navbar sections={navSections} />
 
 <main>
-	<Hero />
+	<Hero imageSrc="/profile-photo.png" />
 	<EngagementModel />
 	<WhyMe />
 	<Clientele />
@@ -39,7 +39,7 @@
 <footer class="bg-surface py-8 border-t border-border">
 	<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
 		<p class="text-text-secondary">
-			© {new Date().getFullYear()} Shiva Vilayanur. All rights reserved.
+			© {new Date().getFullYear()} by <a href="https://sporadicinsights.space/" target="_blank" rel="noopener noreferrer">E.T.Creations</a>. All rights reserved.
 		</p>
 	</div>
 </footer>

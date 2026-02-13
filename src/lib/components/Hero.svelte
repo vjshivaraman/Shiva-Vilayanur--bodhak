@@ -13,9 +13,9 @@
 
 <section
 	id="hero"
-	class="min-h-screen flex items-center justify-center bg-gradient-to-br from-surface via-background to-surface pt-20 md:pt-24"
+	class="hero-gradient-bg min-h-screen flex items-center justify-center bg-hero-bg pt-20 md:pt-24"
 >
-	<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+	<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10">
 		<div class="max-w-4xl mx-auto text-center">
 			<!-- Profile Image -->
 			{#if imageSrc}
@@ -23,27 +23,27 @@
 					<img
 						src={imageSrc}
 						alt="{profile.name}"
-						class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary shadow-lg"
+						class="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-hero-border shadow-2xl"
 						loading="eager"
 					/>
 				</div>
 			{/if}
 
 			<!-- Name and Title -->
-			<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 text-balance">
+			<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-hero-text mb-4 text-balance">
 				{profile.name}
 			</h1>
-			<p class="text-xl md:text-2xl lg:text-3xl text-primary font-semibold mb-6 text-balance">
+			<p class="text-xl md:text-2xl lg:text-3xl text-hero-text-secondary font-semibold mb-6 text-balance">
 				{profile.title}
 			</p>
 
 			<!-- Tagline -->
-			<p class="text-lg md:text-xl text-text-secondary mb-8 max-w-2xl mx-auto text-balance">
+			<p class="text-lg md:text-xl text-hero-text-tertiary mb-8 max-w-2xl mx-auto text-balance">
 				{profile.tagline}
 			</p>
 
 			<!-- Personal Statement -->
-			<blockquote class="text-xl md:text-2xl font-medium text-text mb-12 italic max-w-3xl mx-auto text-balance">
+			<blockquote class="text-xl md:text-2xl font-medium text-hero-text-secondary mb-12 italic max-w-3xl mx-auto text-balance">
 				"{profile.personalStatement}"
 			</blockquote>
 

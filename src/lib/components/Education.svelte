@@ -25,9 +25,9 @@
 									{item.degree}
 								</p>
 							</div>
-							<div class="text-sm md:text-base text-text-secondary mt-2 md:mt-0">
+							<time class="text-sm md:text-base text-text-secondary mt-2 md:mt-0" datetime={item.period}>
 								{item.period}
-							</div>
+							</time>
 						</div>
 					</article>
 				{/each}
