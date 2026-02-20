@@ -24,7 +24,7 @@
 					{#each whyMe.functionalRole.details as detail}
 						<li class="text-text-secondary flex items-start">
 							<svg
-								class="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0"
+								class="h-5 w-5 text-primary mr-2 mt-0.5 shrink-0"
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								aria-hidden="true"
@@ -53,7 +53,7 @@
 					{#each whyMe.industryType.details as detail}
 						<li class="text-text-secondary flex items-start">
 							<svg
-								class="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0"
+								class="h-5 w-5 text-primary mr-2 mt-0.5 shrink-0"
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								aria-hidden="true"
@@ -82,7 +82,7 @@
 					{#each whyMe.workType.details as detail}
 						<li class="text-text-secondary flex items-start">
 							<svg
-								class="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0"
+								class="h-5 w-5 text-primary mr-2 mt-0.5 shrink-0"
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								aria-hidden="true"

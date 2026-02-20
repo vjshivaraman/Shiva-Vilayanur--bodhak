@@ -1,6 +1,6 @@
 # Shiva Vilayanur - Personal Profile Website
 
-A modern, responsive personal profile website for Shiva Vilayanur, Fractional CFO & Strategic Finance Partner. Built with SvelteKit, TypeScript, and TailwindCSS v4.1, featuring WCAG AAA accessibility compliance, bot protection, and offline support.
+A modern, responsive personal profile website for Shiva Vilayanur, Fractional CFO & Strategic Finance Partner. Built with SvelteKit, TypeScript, and TailwindCSS v4.1, featuring WCAG AAA accessibility compliance, SEO optimization, and offline support.
 
 ## Features
 
@@ -8,7 +8,7 @@ A modern, responsive personal profile website for Shiva Vilayanur, Fractional CF
 - **Dark Mode Support**: Automatic theme switching with manual override, respecting system preferences
 - **Offline Support**: Service worker caches all assets for offline access and improved performance
 - **WCAG AAA Compliant**: Highest level of accessibility standards (7:1 contrast ratio for normal text, 4.5:1 for large text)
-- **Bot Protection**: Comprehensive measures to block AI crawlers and search engine indexing
+- **SEO Optimized**: Index-friendly meta tags, Open Graph and Twitter cards, canonical URLs, sitemap, and JSON-LD structured data for search and social sharing
 - **Performance Optimized**: Fast loading with local caching and optimized asset delivery
 - **Modern Design**: Clean, professional interface using TailwindCSS v4.1 with CSS-based theme configuration
 - **Type-Safe**: Full TypeScript support for enhanced developer experience
@@ -44,6 +44,7 @@ graph TB
         H --> I["Page Component"]
         I --> J["Navbar Component"]
         I --> K["Hero Component"]
+        I --> K2["Bodhak Component"]
         I --> L["EngagementModel Component"]
         I --> M["WhyMe Component"]
         I --> N["Clientele Component"]
@@ -54,6 +55,7 @@ graph TB
     subgraph Data["Data Layer"]
         Q["data.ts"] --> I
         Q --> K
+        Q --> K2
         Q --> L
         Q --> M
         Q --> N
@@ -95,6 +97,8 @@ graph TB
         │
         ├──► Hero Component (Profile, Statement, Contact Buttons)
         │
+        ├──► Bodhak Component (Company Identity & Pillars)
+        │
         ├──► EngagementModel Component (3 Models + Methodology)
         │
         ├──► WhyMe Component (3-Column Experience Cards)
@@ -112,6 +116,7 @@ graph TB
 data.ts (Centralized Content)
     │
     ├──► Profile Information
+    ├──► Bodhak Identity & Pillars
     ├──► Engagement Models
     ├──► Methodology Steps
     ├──► Why Me Sections
@@ -177,6 +182,7 @@ shiva-vilayanur/
 │   │   ├── components/          # Reusable Svelte components
 │   │   │   ├── Navbar.svelte    # Floating navigation bar
 │   │   │   ├── Hero.svelte      # Hero section with profile
+│   │   │   ├── Bodhak.svelte   # Bodhak company identity section
 │   │   │   ├── EngagementModel.svelte  # Engagement models section
 │   │   │   ├── WhyMe.svelte     # Why Me section
 │   │   │   ├── Clientele.svelte # Client carousel
@@ -184,16 +190,18 @@ shiva-vilayanur/
 │   │   │   └── Education.svelte # Education section
 │   │   └── data.ts              # Centralized content data
 │   ├── routes/
-│   │   ├── +layout.svelte       # Root layout (theme, meta)
+│   │   ├── +layout.svelte       # Root layout (theme, SEO meta, JSON-LD)
+│   │   ├── +layout.server.ts    # SEO data (canonical, ogImage) per route
 │   │   ├── +layout.ts           # Prerender configuration
-│   │   └── +page.svelte         # Home page (main content)
+│   │   ├── +page.svelte         # Home page (main content)
+│   │   └── sitemap.xml/         # Sitemap endpoint for search engines
 │   ├── app.css                  # Global styles & TailwindCSS @theme
 │   ├── app.d.ts                 # TypeScript declarations
 │   ├── app.html                 # HTML template
-│   ├── hooks.server.ts          # Server hooks (headers, bot protection)
+│   ├── hooks.server.ts          # Server hooks (headers)
 │   └── service-worker.ts        # Service worker for caching
 ├── static/                      # Static assets
-│   ├── robots.txt               # Bot blocking rules
+│   ├── robots.txt               # Crawler access and Sitemap URL
 │   ├── .nojekyll                # Disable Jekyll processing
 │   └── .htaccess                # Apache server rules (if supported)
 ├── .github/
@@ -208,14 +216,15 @@ shiva-vilayanur/
 
 ## Content Sections
 
-The website consists of six main content sections:
+The website consists of seven main content sections:
 
 1. **Hero Section** - Profile photo placeholder, name, title, personal statement, and contact buttons (LinkedIn, Email)
-2. **Engagement Model** - Three engagement models (Diagnostic Sprint, System Build, Interim Leadership) with methodology
-3. **Why Me** - Three-column layout showcasing functional role, industry type, and work type experience
-4. **Clientele** - Revolving carousel displaying client engagements with crisis, action, outcome, and testimonials
-5. **Professional History** - Chronological timeline of work experience with accomplishments and investments
-6. **Education** - Education credentials, certificates, and honors/awards
+2. **Bodhak** - Company identity section with Sanskrit name meaning, three core pillars (Illuminate, Awaken, Guide), and founding statement
+3. **Engagement Model** - Three engagement models (Diagnostic Sprint, System Build, Interim Leadership) with methodology
+4. **Why Me** - Three-column layout showcasing functional role, industry type, and work type experience
+5. **Clientele** - Revolving carousel displaying client engagements with crisis, action, outcome, and testimonials
+6. **Professional History** - Chronological timeline of work experience with accomplishments and investments
+7. **Education** - Education credentials, certificates, and honors/awards
 
 ## Customization
 
@@ -225,8 +234,9 @@ All content is centralized in `src/lib/data.ts`. Edit this file to update profil
 
 ### Adding Profile Photo
 
-1. Place your profile image in the `static/` directory
+1. Place your profile image in the `static/` directory, renamed exactly the same way.
 2. Update the `Hero` component in `src/routes/+page.svelte`:
+
    ```svelte
    <Hero imageSrc="/your-image.jpg" />
    ```
@@ -242,6 +252,7 @@ Colors are configured using TailwindCSS v4.1's `@theme` directive in `src/app.cs
 To modify colors, update CSS variables in `src/app.css`. Colors are automatically available as Tailwind utilities (`bg-primary`, `text-primary`, etc.).
 
 **TailwindCSS v4.1 Configuration:**
+
 - Theme defined via `@theme` directive in CSS (not JavaScript config)
 - `tailwind.config.ts` is minimal (only content paths, plugins, darkMode)
 - `@tailwindcss/vite` plugin handles processing
@@ -255,7 +266,7 @@ This website implements comprehensive measures to block AI crawlers and bots:
 
 - **robots.txt**: Blocks all crawlers including GPTBot, ChatGPT-User, Google-Extended, Claude, Perplexity, and others
 - **Meta Tags**: Multiple meta tags in HTML head to prevent indexing and archiving
-- **HTTP Headers**: X-Robots-Tag headers (via `hooks.server.ts`)
+- **HTTP Headers**: Security headers (via `hooks.server.ts`)
 - **User-Agent Blocking**: Server-side rules for Apache servers (`.htaccess`)
 
 **Note**: While these measures provide strong protection, determined crawlers may still access content. For detailed information, see [BOT_PROTECTION.md](./BOT_PROTECTION.md).
@@ -277,7 +288,7 @@ This website adheres to WCAG AAA standards:
 
 Optimization strategies include:
 
-- **Service Worker**: Caches assets for offline access
+- **Service Worker**: Caches the full site locally on first load (cache-first for app and static assets, then network for updates). Each deployment uses a new cache key so returning visitors get the latest version on their next visit; old caches are removed automatically.
 - **Code Splitting**: Automatic via SvelteKit
 - **Lazy Loading**: Images use `loading="lazy"` attribute
 - **CSS Optimization**: TailwindCSS purges unused styles
@@ -308,6 +319,7 @@ This project is configured for GitHub Pages deployment with automatic CI/CD.
 4. **Access**: Site will be live at `https://your-username.github.io/repo-name`
 
 **Important Notes:**
+
 - If your repo is named `username.github.io`, update `svelte.config.js` to set `base: ''` (empty string)
 - For other repo names, the base path is automatically configured
 - The site includes a `404.html` fallback for client-side routing
@@ -323,7 +335,10 @@ This project is configured for GitHub Pages deployment with automatic CI/CD.
 
 ### Environment Variables
 
-No environment variables required for basic functionality. Add `.env` file if needed for API endpoints, analytics keys, or other configuration.
+- **`PUBLIC_ORIGIN`** (optional, recommended for production): The public URL of your site (e.g. `https://your-username.github.io` or `https://yourdomain.com`). Used for canonical URLs, Open Graph image URL, and sitemap. Set at build time so the sitemap and meta tags use absolute URLs.
+- **`BASE_PATH`** (optional): Set by the build when not in dev (e.g. `/Shiva-Vilayanur` for GitHub Pages project sites). See `svelte.config.js`.
+
+For production SEO, set `PUBLIC_ORIGIN` before building and update `static/robots.txt` with your real Sitemap URL (e.g. `Sitemap: https://yourdomain.com/sitemap.xml`).
 
 ## Development Workflow
 
@@ -351,7 +366,8 @@ Code quality is ensured through TypeScript strict type checking and Svelte compo
 ## Additional Documentation
 
 - **[GITHUB_PAGES_SETUP.md](./GITHUB_PAGES_SETUP.md)** - Detailed GitHub Pages deployment guide
-- **[BOT_PROTECTION.md](./BOT_PROTECTION.md)** - Comprehensive bot protection documentation
+- **[BOT_PROTECTION.md](./BOT_PROTECTION.md)** - Optional bot/AI crawler blocking (site is index-friendly by default)
+- **[docs/MCP_SVELTE_TROUBLESHOOTING.md](./docs/MCP_SVELTE_TROUBLESHOOTING.md)** - Svelte MCP and tooling troubleshooting
 
 ## License
 
@@ -360,6 +376,7 @@ Private project for Shiva Vilayanur. All rights reserved.
 ## Credits
 
 Built with:
+
 - [SvelteKit](https://kit.svelte.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Vite](https://vitejs.dev/)

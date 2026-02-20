@@ -1,7 +1,7 @@
 {
 	"name": "shiva-vilayanur",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -26,5 +26,9 @@
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3",
 		"vite": "^7.3.1"
+	},
+	"dependencies": {
+		"@fontsource-variable/inter": "^5.2.8",
+		"@fontsource/tiro-devanagari-sanskrit": "^5.2.7"
 	}
 }

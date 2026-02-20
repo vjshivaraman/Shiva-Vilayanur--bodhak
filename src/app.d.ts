@@ -10,4 +10,7 @@ declare global {
 	}
 }
 
+declare module '@fontsource-variable/*';
+declare module '@fontsource/*';
+
 export {};

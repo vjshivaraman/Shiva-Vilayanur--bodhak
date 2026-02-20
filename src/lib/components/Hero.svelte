@@ -89,6 +89,29 @@
 					</svg>
 					Email
 				</a>
+
+				<a
+					href={profile.calendlyUrl || '#'}
+					class="inline-flex items-center gap-2 px-6 py-3 bg-surface text-text border-2 border-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary shadow-md hover:shadow-lg"
+					aria-label={profile.calendlyUrl ? 'Book a call' : 'Book a call (link coming soon)'}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-5 w-5"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+						/>
+					</svg>
+					Book a call
+				</a>
 			</div>
 		</div>
 	</div>

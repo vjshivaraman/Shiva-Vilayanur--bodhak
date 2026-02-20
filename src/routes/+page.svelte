@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Hero from '$lib/components/Hero.svelte';
+	import Bodhak from '$lib/components/Bodhak.svelte';
 	import EngagementModel from '$lib/components/EngagementModel.svelte';
 	import WhyMe from '$lib/components/WhyMe.svelte';
 	import Clientele from '$lib/components/Clientele.svelte';
@@ -10,6 +11,7 @@
 
 	const navSections = [
 		{ id: 'hero', label: 'Home' },
+		{ id: 'bodhak', label: 'Bodhak' },
 		{ id: 'engagement-model', label: 'Engagement Model' },
 		{ id: 'why-me', label: 'Why Me' },
 		{ id: 'clientele', label: 'Clientele' },
@@ -18,18 +20,11 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Shiva Vilayanur - Fractional CFO & Strategic Finance Partner</title>
-	<meta
-		name="description"
-		content="Shiva Vilayanur - Fractional CFO & Strategic Finance Partner. Transforming financial chaos into investor-ready clarity."
-	/>
-</svelte:head>
-
 <Navbar sections={navSections} />
 
 <main>
 	<Hero imageSrc={`${base}/profile-photo.png`} />
+	<Bodhak />
 	<EngagementModel />
 	<WhyMe />
 	<Clientele />

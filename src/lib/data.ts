@@ -6,12 +6,38 @@ export const profile = {
 	location: 'Singapore',
 	email: 'vjshivaraman@gmail.com',
 	linkedin: 'https://www.linkedin.com/in/shivavilayanur',
+	/** Calendly booking URL; leave empty or '#' until configured */
+	calendlyUrl: '',
 	summary: 'I help Series A-C Founders transform financial chaos into strategic clarity. Most high-growth founders face the same trap: You have revenue, but not control. You are fighting cash flow fires instead of driving strategy. You are flying blind due to "invisible metrics" that erode your runway. I exist to fix this.',
 	dualLens: {
 		operator: '20 years of discipline from Intel, GE, HP, & eBay.',
 		investor: 'Former VC Co-Founder & Active Angel, knowing exactly what the Board needs to see.',
 	},
 	beyondBalanceSheet: 'I am a competitive cricketer and strength athlete. I believe building a recession-proof business requires the same resilience as building a durable body.',
+};
+
+export const bodhak = {
+	sanskrit: 'बोधक',
+	name: 'BODHAK',
+	pronunciation: 'Sanskrit · बोधक · /boː.d̪ʱək/',
+	meaning: 'One who illuminates. One who awakens understanding.',
+	pillars: [
+		{
+			title: 'Illuminate',
+			description: 'We turn opaque financials into clear, investor-grade visibility.',
+		},
+		{
+			title: 'Awaken',
+			description: 'We help founders see what the numbers are really telling them.',
+		},
+		{
+			title: 'Guide',
+			description:
+				'Rooted in APAC, we navigate multi-jurisdiction complexity with confidence.',
+		},
+	],
+	statement:
+		"Bodhak Pte Ltd was founded on this principle — that the right financial clarity doesn't just report the past. It lights the path forward.",
 };
 
 export const engagementModels = [

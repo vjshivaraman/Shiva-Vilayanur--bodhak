@@ -7,78 +7,70 @@ import { build, files, version } from '$service-worker';
 
 const self = globalThis.self as unknown as ServiceWorkerGlobalScope;
 
-// Create a unique cache name for this deployment
-const CACHE = `cache-${version}`;
+// Unique cache name per deployment — new version invalidates old caches
+const CACHE = `portfolio-${version}`;
 
-const ASSETS = [
-	...build, // the app itself
-	...files, // everything in `static`
-];
+const ASSETS = [...build, ...files];
 
 self.addEventListener('install', (event) => {
-	// Create a new cache and add all files to it
 	async function addFilesToCache() {
 		const cache = await caches.open(CACHE);
 		await cache.addAll(ASSETS);
 	}
-
-	event.waitUntil(addFilesToCache());
+	// Activate this worker as soon as it’s installed so “newer version” takes effect on next load
+	event.waitUntil(addFilesToCache().then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (event) => {
-	// Remove previous cached data from disk
-	async function deleteOldCaches() {
-		for (const key of await caches.keys()) {
-			if (key !== CACHE) await caches.delete(key);
-		}
+	async function takeControl() {
+		const keys = await caches.keys();
+		await Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)));
+		await self.clients.claim();
 	}
-
-	event.waitUntil(deleteOldCaches());
+	event.waitUntil(takeControl());
 });
 
 self.addEventListener('fetch', (event) => {
-	// ignore POST requests etc
 	if (event.request.method !== 'GET') return;
 
 	async function respond() {
 		const url = new URL(event.request.url);
 		const cache = await caches.open(CACHE);
+		const isNavigate = event.request.mode === 'navigate';
 
-		// `build`/`files` can always be served from the cache
+		// Known assets: serve from cache first (offline-first for app and static files)
 		if (ASSETS.includes(url.pathname)) {
-			const response = await cache.match(url.pathname);
-
-			if (response) {
-				return response;
-			}
+			const cached = await cache.match(url.pathname);
+			if (cached) return cached;
 		}
 
-		// for everything else, try the network first, but
-		// fall back to the cache if we're offline
+		// Document/navigation: try cache first, then index.html for “/” or “/base/”
+		if (isNavigate) {
+			let cached = await cache.match(event.request);
+			if (!cached) {
+				const indexPath = (url.pathname.replace(/\/$/, '') || '/') + '/index.html';
+				cached = await cache.match(url.origin + indexPath);
+			}
+			if (cached) return cached;
+		}
+
+		// Network first; cache successful responses for later offline use
 		try {
 			const response = await fetch(event.request);
-
-			// if we're offline, fetch can return a value that is not a Response
-			// instead of throwing - and we can't pass this non-Response to respondWith
-			if (!(response instanceof Response)) {
-				throw new Error('invalid response from fetch');
-			}
-
-			if (response.status === 200) {
+			if (!(response instanceof Response)) throw new Error('invalid response from fetch');
+			if (response.status === 200 && response.type === 'basic') {
 				cache.put(event.request, response.clone());
 			}
-
 			return response;
-		} catch (err) {
-			const response = await cache.match(event.request);
-
-			if (response) {
-				return response;
+		} catch {
+			const cached = await cache.match(event.request);
+			if (cached) return cached;
+			if (isNavigate) {
+				const indexPath = (url.pathname.replace(/\/$/, '') || '/') + '/index.html';
+				const indexCached = await cache.match(url.origin + indexPath);
+				if (indexCached) return indexCached;
 			}
-
-			// if there's no cache, then just error out
-			// as there is nothing we can do to respond to this request
-			throw err;
+			throw new Error('Offline and not in cache');
 		}
 	}
 
