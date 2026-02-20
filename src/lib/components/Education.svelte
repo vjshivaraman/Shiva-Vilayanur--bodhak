@@ -44,7 +44,7 @@
 							<div class="bg-surface p-6 rounded-lg shadow-md">
 								<div class="flex items-start">
 									<svg
-										class="h-6 w-6 text-accent mr-3 mt-1 flex-shrink-0"
+										class="h-6 w-6 text-accent mr-3 mt-1 shrink-0"
 										fill="currentColor"
 										viewBox="0 0 20 20"
 										aria-hidden="true"

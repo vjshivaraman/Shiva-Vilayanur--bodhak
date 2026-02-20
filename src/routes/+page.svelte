@@ -11,12 +11,10 @@
 
 	const navSections = [
 		{ id: 'hero', label: 'Home' },
-		{ id: 'bodhak', label: 'Bodhak' },
 		{ id: 'engagement-model', label: 'Engagement Model' },
 		{ id: 'why-me', label: 'Why Me' },
 		{ id: 'clientele', label: 'Clientele' },
 		{ id: 'professional-history', label: 'Experience' },
-		{ id: 'education', label: 'Education' },
 	];
 </script>
 

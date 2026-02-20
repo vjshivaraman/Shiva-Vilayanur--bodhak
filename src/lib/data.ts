@@ -1,10 +1,10 @@
 export const profile = {
 	name: 'Shiva Vilayanur',
 	title: 'Fractional CFO & Strategic Finance Partner',
-	tagline: 'Transforming financial chaos into investor-ready clarity for high-growth fintechs.',
+	tagline: 'Transforming financial chaos into investor-ready clarity.',
 	personalStatement: 'I partner with founders to fix the engine while they drive the car.',
 	location: 'Singapore',
-	email: 'vjshivaraman@gmail.com',
+	email: 'vjshivaraman(AT)gmail.com',
 	linkedin: 'https://www.linkedin.com/in/shivavilayanur',
 	/** Calendly booking URL; leave empty or '#' until configured */
 	calendlyUrl: '',
@@ -24,20 +24,20 @@ export const bodhak = {
 	pillars: [
 		{
 			title: 'Illuminate',
-			description: 'We turn opaque financials into clear, investor-grade visibility.',
+			description: 'We light opaque financials into clear, investor-grade visibility.',
 		},
 		{
 			title: 'Awaken',
-			description: 'We help founders see what the numbers are really telling them.',
+			description: 'We enlighten founders to see what the numbers are really telling them.',
 		},
 		{
 			title: 'Guide',
 			description:
-				'Rooted in APAC, we navigate multi-jurisdiction complexity with confidence.',
+				'Rooted in APAC, we navigate multi-jurisdiction complexity with clarity.',
 		},
 	],
 	statement:
-		"Bodhak Pte Ltd was founded on this principle — that the right financial clarity doesn't just report the past. It lights the path forward.",
+		"Bodhak Pte Ltd was founded on this principle — the right financial clarity lights the path forward.",
 };
 
 export const engagementModels = [
@@ -55,7 +55,7 @@ export const engagementModels = [
 	{
 		number: '03',
 		title: 'Interim Leadership On-Demand',
-		description: 'Hands-on CFO leadership for critical transitions (M&A, Exits). Leading fundraising cycles.',
+		description: 'Hands-on CFO leadership for critical transitions (M&A, Exits), leading fundraising cycles.',
 	},
 ];
 
@@ -107,7 +107,6 @@ export const whyMe = {
 export const clientele = [
 	{
 		name: 'Series A Scale Digital Consultancy',
-		confidential: true,
 		crisis: 'Founders trapped in "finance firefighting" and tight liquidity.',
 		action: 'Secured debt financing. Redesigned P&L and implemented a cash culture.',
 		outcome: 'Extended runway by 12-18 months and delivered ~20X ROI on engagement.',
@@ -125,7 +124,6 @@ export const clientele = [
 	},
 	{
 		name: 'Early Stage SaaS Platform',
-		confidential: true,
 		crisis: 'Fresh fundraising round secured but zero visibility into SaaS metrics.',
 		action: 'Rebuilt finance stack from scratch (Xero/Syft) for automated Board reporting.',
 		outcome: 'Transformed "black box" accounting into Investor-Grade Control, freeing 70% of founder time.',
@@ -260,11 +258,4 @@ export const education = [
 export const honors = [
 	'Nomination - eBay Global best of the best leadership award',
 	'Finance Divisional recognition award',
-];
-
-export const languages = [
-	{ name: 'English', level: 'Native or Bilingual' },
-	{ name: 'Hindi', level: 'Native or Bilingual' },
-	{ name: 'Tamil', level: 'Native or Bilingual' },
-	{ name: 'Kannada', level: 'Limited Working' },
 ];
