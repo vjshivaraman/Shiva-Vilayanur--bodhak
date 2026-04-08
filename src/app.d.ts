@@ -2,15 +2,21 @@
 // for information about these interfaces
 declare global {
 	namespace App {
+		interface Platform {
+			env: Env;
+			ctx: ExecutionContext;
+			caches: CacheStorage;
+			cf?: IncomingRequestCfProperties
+		}
+
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
-		// interface Platform {}
 	}
 }
 
-declare module '@fontsource-variable/*';
-declare module '@fontsource/*';
+declare '@fontsource-variable/*'
+declare '@fontsource/*'
 
 export {};
