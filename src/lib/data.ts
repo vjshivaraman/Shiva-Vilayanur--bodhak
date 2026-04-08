@@ -4,7 +4,7 @@ export const profile = {
 	tagline: 'Transforming financial chaos into investor-ready clarity.',
 	personalStatement: 'I partner with founders to fix the engine while they drive the car.',
 	location: 'Singapore',
-	email: 'vjshivaraman(AT)gmail.com',
+	email: 'shiva.vilayanur@bodhak.io',
 	linkedin: 'https://www.linkedin.com/in/shivavilayanur',
 	/** Calendly booking URL; leave empty or '#' until configured */
 	calendlyUrl: '',
