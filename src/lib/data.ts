@@ -7,7 +7,7 @@ export const profile = {
 	email: 'shiva.vilayanur@bodhak.io',
 	linkedin: 'https://www.linkedin.com/in/shivavilayanur',
 	/** Calendly booking URL; leave empty or '#' until configured */
-	calendlyUrl: '',
+	calendlyUrl: 'https://calendly.com/shiva-vilayanur-bodhak/30min',
 	summary: 'I help Series A-C Founders transform financial chaos into strategic clarity. Most high-growth founders face the same trap: You have revenue, but not control. You are fighting cash flow fires instead of driving strategy. You are flying blind due to "invisible metrics" that erode your runway. I exist to fix this.',
 	dualLens: {
 		operator: '20 years of discipline from Intel, GE, HP, & eBay.',
