@@ -132,7 +132,7 @@ export const clientele = [
 
 export const professionalHistory = [
 	{
-		company: 'Shiva Vilayanur Consulting',
+		company: 'Bodhak Pte Ltd',
 		role: 'Fractional CFO',
 		period: 'November 2023 - Present',
 		location: 'Singapore',
