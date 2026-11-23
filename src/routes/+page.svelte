@@ -35,5 +35,8 @@
 		<p class="text-text-secondary">
 			© {new Date().getFullYear()} Bodhak Pte Ltd. All rights reserved.
 		</p>
+		<p class="text-sm text-text-secondary mt-2">
+			Data Protection Officer: Shiva Vilayanur · <a href="mailto:shiva.vilayanur@bodhak.io" class="underline underline-offset-2 hover:text-text">shiva.vilayanur@bodhak.io</a>
+		</p>
 	</div>
 </footer>
