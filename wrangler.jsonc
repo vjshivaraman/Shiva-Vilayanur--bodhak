@@ -1,0 +1,10 @@
+{
+	// Cloudflare Workers config: serve the static SvelteKit build output.
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "shiva-vilayanur--bodhak",
+	"compatibility_date": "2026-11-19",
+	"assets": {
+		"directory": "./build",
+		"not_found_handling": "404-page"
+	}
+}
