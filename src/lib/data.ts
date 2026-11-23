@@ -106,6 +106,13 @@ export const whyMe = {
 
 export const clientele = [
 	{
+		name: 'Multi-Entity Deeptech/SaaS Group',
+		description: 'Fractional CFO, four jurisdictions',
+		crisis: '$11M fund raise across a complex four-jurisdiction group structure.',
+		action: 'Led financial due diligence and the data room, share-capital structuring, CCPS mechanics and cross-border tax optimization.',
+		outcome: 'Supported the successful $11M fund raise, with institutional-grade financials throughout.',
+	},
+	{
 		name: 'Series A Scale Digital Consultancy',
 		crisis: 'Founders trapped in "finance firefighting" and tight liquidity.',
 		action: 'Secured debt financing. Redesigned P&L and implemented a cash culture.',
