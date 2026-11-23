@@ -1,7 +1,0 @@
-# Allow search engine crawlers
-User-agent: *
-Allow: /
-
-# Sitemap (replace with your production origin, e.g. https://yourdomain.com/sitemap.xml)
-# See README for PUBLIC_ORIGIN and updating this URL after deployment.
-Sitemap: https://example.com/sitemap.xml
