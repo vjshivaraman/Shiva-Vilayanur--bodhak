@@ -2,6 +2,29 @@
 	import { profile } from '../data';
 
 	let { imageSrc } = $props<{ imageSrc?: string }>();
+
+	let copied = $state(false);
+	let copyTimer: ReturnType<typeof setTimeout> | null = null;
+
+	async function copyEmail() {
+		try {
+			await navigator.clipboard.writeText(profile.email);
+		} catch {
+			// Fallback for browsers without clipboard API access
+			const ta = document.createElement('textarea');
+			ta.value = profile.email;
+			ta.setAttribute('readonly', '');
+			ta.style.position = 'absolute';
+			ta.style.left = '-9999px';
+			document.body.appendChild(ta);
+			ta.select();
+			document.execCommand('copy');
+			document.body.removeChild(ta);
+		}
+		copied = true;
+		if (copyTimer) clearTimeout(copyTimer);
+		copyTimer = setTimeout(() => (copied = false), 2000);
+	}
 </script>
 
 <section
@@ -50,7 +73,7 @@
 					href={profile.linkedin}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="inline-flex items-center gap-2 px-6 py-3 bg-primary-dark text-white rounded-lg font-semibold hover:opacity-90 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary shadow-md hover:shadow-lg"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-primary-dark text-white rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary shadow-md hover:shadow-lg"
 					aria-label="Connect on LinkedIn"
 				>
 					<svg
@@ -92,7 +115,7 @@
 
 				<a
 					href={profile.calendlyUrl || '#'}
-					class="inline-flex items-center gap-2 px-6 py-3 bg-surface text-text border-2 border-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary shadow-md hover:shadow-lg"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-surface text-text border-2 border-primary rounded-lg text-lg font-semibold hover:bg-primary/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary shadow-md hover:shadow-lg"
 					aria-label={profile.calendlyUrl ? 'Book a call' : 'Book a call (link coming soon)'}
 				>
 					<svg
@@ -112,6 +135,35 @@
 					</svg>
 					Book a call
 				</a>
+			</div>
+
+			<!-- Visible email address with copy -->
+			<div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-hero-text-secondary">
+				<a
+					href="mailto:{profile.email}"
+					class="text-lg md:text-xl font-medium tracking-wide underline decoration-hero-border underline-offset-4 hover:decoration-hero-text-secondary select-all"
+				>
+					{profile.email}
+				</a>
+				<button
+					type="button"
+					onclick={copyEmail}
+					class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-semibold rounded-md border border-hero-border text-hero-text hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+					aria-label="Copy email address"
+				>
+					{#if copied}
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+						</svg>
+						Copied
+					{:else}
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+						</svg>
+						Copy
+					{/if}
+				</button>
+				<span class="sr-only" aria-live="polite">{copied ? 'Email address copied' : ''}</span>
 			</div>
 		</div>
 	</div>
