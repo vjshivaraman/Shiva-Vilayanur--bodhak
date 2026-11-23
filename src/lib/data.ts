@@ -253,16 +253,11 @@ export const education = [
 	{
 		institution: 'Indian Institute of Management, Indore',
 		degree: 'MBA, Finance',
-		period: '2001 - 2003',
 	},
 	{
 		institution: 'Institute of Chartered Accountants of India',
 		degree: 'Chartered Accountant, Finance',
-		period: '1994 - 1998',
 	},
 ];
 
-export const honors = [
-	'Nomination - eBay Global best of the best leadership award',
-	'Finance Divisional recognition award',
-];
+export const honors: string[] = [];

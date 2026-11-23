@@ -16,7 +16,7 @@
 			<div class="space-y-8 mb-12">
 				{#each education as item}
 					<article class="bg-surface p-6 md:p-8 rounded-lg shadow-md">
-						<div class="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+						<div class="flex flex-col md:flex-row md:items-start md:justify-between">
 							<div>
 								<h3 class="text-xl md:text-2xl font-semibold text-text mb-2">
 									{item.institution}
@@ -25,9 +25,6 @@
 									{item.degree}
 								</p>
 							</div>
-							<time class="text-sm md:text-base text-text-secondary mt-2 md:mt-0" datetime={item.period}>
-								{item.period}
-							</time>
 						</div>
 					</article>
 				{/each}
