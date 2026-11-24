@@ -140,7 +140,7 @@ export const clientele = [
 export const professionalHistory = [
 	{
 		company: 'Bodhak Pte Ltd',
-		role: 'Fractional CFO',
+		role: 'Founder & Fractional CFO',
 		period: 'November 2023 - Present',
 		location: 'Singapore',
 		duration: '2 years 4 months',
